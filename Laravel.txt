@@ -1,0 +1,56 @@
+
+php artisan serve
+php artisan make:model NamaModel -mcr (migration, create, resource)
+php artisan make:model Fakultas -mcr
+php artisan make:controller NamaController
+php artisan make:model NamaModel
+php artisan migrate
+
+1.composer create-project --prefer-dist laravel/Laravel:^12.0 if21-laravel
+2. php artisan serve
+3. php artisan make:model Fakultas -mcr
+4. isi function up di migration fakultas
+ public function up(): void
+    {
+        Schema::create('fakultas', function (Blueprint $table) {
+            $table->uuid("id"); //uuid = kode agar primary key nya aman 
+            $table->primary("id");
+            $table->string('nama', 50);
+            $table->string("singkatan", 4);
+            $table->string("nama_dekan", 30);
+            $table->string("nama_wadek",30);
+            $table->timestamps();
+        });
+    }
+
+5. ubah env 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_if21
+DB_USERNAME=root
+DB_PASSWORD=
+6.php artisan migrate
+7. Ubah route web.php
+Route::resource('/fakultas', FakultasController::class);
+8. Ubah model fakultas
+class Fakultas extends Model
+{
+    protected $fillable = ['nama','singkatan','nama_dekan','nama_wadek'];
+}
+9. ubah controller fakultas
+public function index()
+    {
+        //akses model fakultas
+        $fakultas = Fakultas::all(); //select*from fakultas
+        // dd($fakultas); //dump data
+        return view('fakultas.index')->with('fakultas',$fakultas);
+    }
+10. <h1>Fakultas</h1>
+@foreach ($fakultas as $item) 
+{{-- //$fakultas diambil dari with pada controller --}}
+    {{ $item->nama }}
+    {{ $item->singkatan }}
+    {{ $item->nama_dekan }}
+    {{ $item->nama_wadek }}
+@endforeach
