@@ -54,3 +54,53 @@ public function index()
     {{ $item->nama_dekan }}
     {{ $item->nama_wadek }}
 @endforeach
+
+1. Clone repo Laravel
+2. Composer install in terminal
+3. Salin .env.example and rename to .env
+4. Turn on MYSQL
+5. Php artisan migrate
+6. Php artisan serve
+7. php artisan key:generate
+8. php artisan make:model Prodi -mcr
+9. Prodi Model
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Prodi extends Model
+{
+    protected $table ='prodi';
+    protected $fillable = ['nama','singkatan','kaprodi','sekretaris','fakultas_id'];
+}
+10. Prodi Controller
+public function index()
+    {
+        $prodi = Prodi::all(); //$prodi hanya alias
+        return view('prodi.index',compact('prodi')); compact('alias')
+    }
+11. web route 
+Route::resource('/prodi', ProdiController::class);
+12. migrate prodi
+Schema::create('prodi', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->primary('id');
+            $table->string('nama', 30);
+            $table->char('singkatan',2);
+            $table->string('kaprodi', 30);
+            $table->string('sekretaris', 30);
+            // $table->foreignId('fakultas_id')->constrained('fakultas')->onDelete('restrict')->onUpdate('restrict'); ini make Id default int 
+            $table->uuid('fakultas_id');
+            $table->foreign('fakultas_id')->references('id')->on('fakultas')->onDelete('restrict')->onUpdate('restrict');
+            $table->timestamps();
+        });
+13. <h1>Prodi</h1>
+@foreach ($prodi as $item) //$prodi = alias yang sama
+{{ $item -> nama }}
+{{ $item -> singkatan }}
+{{ $item -> kaprodi }}
+{{ $item -> sekretaris }}
+@endforeach
