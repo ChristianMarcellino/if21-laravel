@@ -33,10 +33,11 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    
+                    <a class="nav-link mb-3" href="{{route('prodi.create')}}"><button class="btn btn-primary">Create New Prodi</button></a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Singkatan</th>
                                 <th>Nama Kaprodi</th>
@@ -47,6 +48,7 @@
                         <tbody>
                             @foreach ($prodi as $item)  
                                 <tr>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{ $item -> nama }}</td>
                                     <td>{{ $item -> singkatan }}</td>
                                     <td>{{$item->kaprodi}}</td>

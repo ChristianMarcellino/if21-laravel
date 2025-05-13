@@ -33,9 +33,11 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <a class="nav-link mb-3" href="{{route('fakultas.create')}}"><button class="btn btn-primary">Create New Fakultas</button></a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Singkatan</th>
                                 <th>Nama Dekan</th>
@@ -45,6 +47,7 @@
                         <tbody>
                             @foreach ($fakultas as $item)  
                                 <tr>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{ $item -> nama }}</td>
                                     <td>{{ $item -> singkatan }}</td>
                                     <td>{{$item->nama_dekan}}</td>

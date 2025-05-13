@@ -21,7 +21,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        $fakultas = \App\Models\Fakultas::all();
+        return view('prodi.create', compact('fakultas'));
     }
 
     /**
@@ -29,7 +30,17 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'nama' => 'required|unique:fakultas|max:50',
+            'singkatan' => 'required|unique:fakultas|max:4',
+            'kaprodi' => 'required|max:30',
+            'sekretaris' => 'required|max:30',
+            'fakultas_id' => 'required|'
+        ]);
+
+        Prodi::create($input);
+
+        return redirect()->route('prodi.index')->with('success', 'Fakultas Berhasil Disimpan');
     }
 
     /**

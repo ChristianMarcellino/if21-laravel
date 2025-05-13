@@ -37,6 +37,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>NPM</th>
                                 <th>Jenis Kelamin</th>
@@ -49,6 +50,7 @@
                         <tbody>
                             @foreach ($mahasiswa as $item)  
                                 <tr>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{ $item -> nama }}</td>
                                     <td>{{ $item -> npm }}</td>
                                     <td>
