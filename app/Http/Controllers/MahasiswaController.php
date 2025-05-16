@@ -21,7 +21,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $prodi = \App\Models\Prodi::all();
+        return view('mahasiswa.create', compact('prodi'));
     }
 
     /**
@@ -29,7 +30,27 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'nama' => 'required|max:50',
+            'npm' => 'required|unique:mahasiswa|max:11',
+            'jk' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required|max:30',
+            'asal_sma' => 'required|max:30',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
+            'prodi_id' => 'required'
+        ]);
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $filename =time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images'),$filename);
+            $input['foto'] = $filename; 
+        }
+
+        Mahasiswa::create($input);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Disimpan');
     }
 
     /**

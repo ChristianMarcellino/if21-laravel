@@ -31,8 +31,8 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'nama' => 'required|unique:fakultas|max:50',
-            'singkatan' => 'required|unique:fakultas|max:4',
+            'nama' => 'required|unique:prodi|max:50',
+            'singkatan' => 'required|unique:prodi|max:4',
             'kaprodi' => 'required|max:30',
             'sekretaris' => 'required|max:30',
             'fakultas_id' => 'required|'
@@ -40,7 +40,7 @@ class ProdiController extends Controller
 
         Prodi::create($input);
 
-        return redirect()->route('prodi.index')->with('success', 'Fakultas Berhasil Disimpan');
+        return redirect()->route('prodi.index')->with('success', 'Mahasiswa Berhasil Disimpan');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
@@ -13,4 +14,6 @@ class Mahasiswa extends Model
     public function prodi(){
         return $this->belongsTo(Prodi::class, 'prodi_id', 'id');
     }
+
+    use HasUuids;
 }

@@ -33,7 +33,7 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    
+                    <a class="nav-link mb-3" href="{{route('mahasiswa.create')}}"><button class="btn btn-primary">Create New Mahasiswa</button></a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -42,6 +42,7 @@
                                 <th>NPM</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Asal Sekolah</th>
+                                <th>Foto</th>
                                 <th>Tempat Lahir</th>
                                 <th>Program Studi</th>
                                 <th>Fakultas</th>
@@ -63,6 +64,7 @@
                                         ?>
                                     </td>
                                     <td>{{ $item -> asal_sma }}</td>
+                                    <td><img src="{{ $item -> foto }}" alt=""></td>
                                     <td>{{ $item -> tempat_lahir }}</td>
                                     <td>{{$item->prodi->nama}}</td>
                                     <td>{{ $item -> prodi -> fakultas -> nama }}</td>

@@ -186,3 +186,158 @@ class Fakultas extends Model
 
     use HasUuids; jika menggunakan UUID
 }
+
+18. View form mahasiswa
+
+@extends('main')
+
+@section('title', 'Mahasiswa')
+@section('content')
+<div class="app-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary card-outline mb-4">
+                  <div class="card-header"><div class="card-title">Form Tambah @yield('title')</div></div>
+                  <form action="{{ route('mahasiswa.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                      <div class="mb-3">
+                        <label for="nama" class="form-label">Nama Mahasiswa</label>
+                        <input type="text" class="form-control" name="nama">
+                      </div>
+                      <div class="mb-3">
+                        <label for="npm" class="form-label">NPM Mahasiswa</label>
+                        <input type="text" class="form-control" name="npm">
+                      </div>
+                      <div class="mb-3">
+                        <label for="nama" class="form-label">Jenis Kelamin</label>
+                        <br>
+                        <input checked class="form-check-input" value="L" id="L" type="radio" name="jk">
+                        <label for="jk" class="form-check-label">Laki-Laki</label>
+                        <input class="form-check-input" type="radio" id="P" value="P" name="jk">
+                        <label for="jk" class="form-check-label">Perempuan</label>
+                      </div>
+                      <div class="mb-3">
+                        <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir">
+                      </div>
+                      <div class="mb-3">
+                        <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                        <input type="text" class="form-control" name="tempat_lahir">
+                      </div>
+                      <div class="mb-3">
+                        <label for="asal_sma" class="form-label">Asal SMA/SMK</label>
+                        <input type="text" class="form-control" name="asal_sma">
+                      </div>
+                      <div class="mb-3">
+                        <label for="foto" class="form-label">Foto</label>
+                        <input class="form-control" name="foto" type="file" id="foto">
+                    </div>
+                      <div class="mb-3">
+                        <label for="prodi_id" class="form-label">Program Studi</label>
+                        <select class="form-select" name="prodi_id" id="prodi_id">
+                        @foreach ($prodi as $item)
+                          <option value="{{ $item -> id }}">{{ $item->nama }}</option>
+                        @endforeach
+                      </select>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+19. MahasiswaController
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
+
+class MahasiswaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.index',compact('mahasiswa'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $prodi = \App\Models\Prodi::all();
+        return view('mahasiswa.create', compact('prodi'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $input = $request->validate([
+            'nama' => 'required|max:50',
+            'npm' => 'required|unique:mahasiswa|max:11',
+            'jk' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required|max:30',
+            'asal_sma' => 'required|max:30',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
+            'prodi_id' => 'required'
+        ]);
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $filename =time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images'),$filename);
+            $input['foto'] = $filename; 
+        }
+
+        Mahasiswa::create($input);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Disimpan');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Mahasiswa $mahasiswa)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Mahasiswa $mahasiswa)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Mahasiswa $mahasiswa)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Mahasiswa $mahasiswa)
+    {
+        //
+    }
+}
