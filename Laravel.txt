@@ -341,3 +341,7 @@ class MahasiswaController extends Controller
         //
     }
 }
+
+20. storage private
+FILESYSTEM_DISK=public //env
+php artisan storage:link

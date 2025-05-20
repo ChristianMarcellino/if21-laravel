@@ -46,6 +46,7 @@
                                 <th>Tempat Lahir</th>
                                 <th>Program Studi</th>
                                 <th>Fakultas</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,10 +65,17 @@
                                         ?>
                                     </td>
                                     <td>{{ $item -> asal_sma }}</td>
-                                    <td><img src="{{ $item -> foto }}" alt=""></td>
+                                    <td><img class="m-auto" src="{{ asset('storage/images/'.$item->foto) }}" alt="Image" style="width: 100px;"></td>
                                     <td>{{ $item -> tempat_lahir }}</td>
                                     <td>{{$item->prodi->nama}}</td>
                                     <td>{{ $item -> prodi -> fakultas -> nama }}</td>
+                                    <td>
+                                      <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="m-auto btn btn-tool"type="submit"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
+                                      </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

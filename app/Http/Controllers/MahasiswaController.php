@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -44,7 +45,8 @@ class MahasiswaController extends Controller
         if($request->hasFile('foto')){
             $file = $request->file('foto');
             $filename =time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('images'),$filename);
+            // $file->move(public_path('images'),$filename);Public Path
+            $file->storeAs('images', $filename);//Storage
             $input['foto'] = $filename; 
         }
 
@@ -66,7 +68,10 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        $prodi = \App\Models\Prodi::all();
+        $mahasiswa = Mahasiswa::all();
+        
+        return view ('mahasiswa.edit',compact('mahasiswa,prodi'));
     }
 
     /**
@@ -74,7 +79,7 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        Prodi::update($mahasiswa);
     }
 
     /**
@@ -82,6 +87,8 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+        Storage::disk('public')->delete('images/'.$mahasiswa->foto);
+        return redirect()->route('mahasiswa.index')->with('success','Data Mahasiswa Berhasil Terhapus');
     }
 }

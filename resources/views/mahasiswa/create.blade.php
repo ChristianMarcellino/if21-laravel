@@ -5,7 +5,7 @@
 <div class="app-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <div class="card card-primary card-outline mb-4">
                   <div class="card-header"><div class="card-title">Form Tambah @yield('title')</div></div>
                   <form action="{{ route('mahasiswa.store')}}" method="POST" enctype="multipart/form-data">

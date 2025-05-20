@@ -43,6 +43,7 @@
                                 <th>Nama Kaprodi</th>
                                 <th>Nama Sekretaris</th>
                                 <th>Nama Fakultas</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,13 @@
                                     <td>{{$item->kaprodi}}</td>
                                     <td>{{ $item -> sekretaris }}</td>
                                     <td>{{ $item -> fakultas -> nama}}</td>
+                                    <td>
+                                      <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="m-auto btn btn-tool"type="submit"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
+                                      </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
