@@ -424,6 +424,64 @@
         }
       });
     </script>
+    
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        $('.confirm_input').click(function(event){
+          var form = $(this).closest("form");
+          var nama = $('#nama').val();
+          event.preventDefault();
+          Swal.fire({
+            title: "Good job!",
+            text: `Data ${nama} Berhasil Ditambahkan`,
+            icon: "success"
+          }).then((result)=>{
+            form.submit();
+          });
+        })
+      </script>
+      <script>
+        $('.confirm_edit').click(function(event){
+          var form = $(this).closest("form");
+          var nama = $('#nama').val();
+          event.preventDefault();
+          Swal.fire({
+            title: "Good job!",
+            text: `Data ${nama} Berhasil Diubah`,
+            icon: "success"
+          }).then((result)=>{
+            form.submit();
+          });
+        })
+      </script>
+      <script>
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var nama = $(this).data("nama");
+            event.preventDefault();
+          Swal.fire({
+            title: "Are you sure?",
+            text: `You are about to delete ${nama}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+                timer:10000
+              }).then(()=>{
+                form.submit();  
+              });
+            }
+          });
+        })
+      </script>
     <!--end::OverlayScrollbars Configure-->
     <!--end::Script-->
   </body>

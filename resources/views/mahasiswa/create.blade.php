@@ -13,7 +13,7 @@
                     <div class="card-body">
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Mahasiswa</label>
-                        <input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
+                        <input id='nama' type="text" class="form-control" name="nama" value="{{ old('nama') }}">
                         @error('nama')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -28,9 +28,9 @@
                       <div class="mb-3">
                         <label for="nama" class="form-label">Jenis Kelamin</label>
                         <br>
-                        <input checked class="form-check-input" value="L" id="L" type="radio" name="jk" {{ old('jk') == 'L' ? 'selected' : null }}>
+                        <input checked class="form-check-input" value="L" id="L" type="radio" name="jk" {{ old('jk') == 'L' ? 'checked' : null }}>
                         <label for="jk" class="form-check-label">Laki-Laki</label>
-                        <input class="form-check-input" type="radio" id="P" value="P" name="jk" {{ old('jk') == 'P' ? 'selected' : null }}>
+                        <input class="form-check-input" type="radio" id="P" value="P" name="jk" {{ old('jk') == 'P' ? 'checked' : null }}>
                         <label for="jk" class="form-check-label">Perempuan</label>
                       </div>
                       <div class="mb-3">
@@ -71,7 +71,7 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary confirm_input">Submit</button>
                     </div>
                   </form>
                 </div>

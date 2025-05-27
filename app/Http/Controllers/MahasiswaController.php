@@ -23,7 +23,8 @@ class MahasiswaController extends Controller
     public function create()
     {
         $prodi = \App\Models\Prodi::all();
-        return view('mahasiswa.create', compact('prodi'));
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.create', compact('mahasiswa','prodi'));
     }
 
     /**
@@ -66,20 +67,42 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($mahasiswa)
     {
+        $mahasiswa= Mahasiswa::findOrFail($mahasiswa);
         $prodi = \App\Models\Prodi::all();
-        $mahasiswa = Mahasiswa::all();
-        
-        return view ('mahasiswa.edit',compact('mahasiswa,prodi'));
+        return view ('mahasiswa.edit',compact('mahasiswa','prodi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $mahasiswa)
     {
-        Prodi::update($mahasiswa);
+        $mahasiswa = Mahasiswa::findOrFail($mahasiswa);
+        $prodi = \App\Models\Prodi::all();
+        $input = $request->validate([
+            'nama' => 'required|max:50',
+            'npm' => 'required|max:11',
+            'jk' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required|max:30',
+            'asal_sma' => 'required|max:30',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'prodi_id' => 'required'
+        ]);
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $filename =time().'.'.$file->getClientOriginalExtension();
+            // $file->move(public_path('images'),$filename);Public Path
+            $file->storeAs('images', $filename);//Storage
+            $input['foto'] = $filename; 
+        }
+
+        $mahasiswa->update($input);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Diubah');
     }
 
     /**

@@ -56,10 +56,11 @@
                                     <td>{{ $item -> sekretaris }}</td>
                                     <td>{{ $item -> fakultas -> nama}}</td>
                                     <td>
-                                      <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
+                                      <a href="{{ route ('prodi.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
+                                      <form method="POST"  action="{{ route('prodi.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="m-auto btn btn-tool"type="submit"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
+                                        <button type="submit" class="m-auto btn btn-tool show_confirm" title="Delete" data-nama="{{ $item->name }}"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
                                       </form>
                                     </td>
                                 </tr>

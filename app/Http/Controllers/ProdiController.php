@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -56,15 +57,27 @@ class ProdiController extends Controller
      */
     public function edit(Prodi $prodi)
     {
-        //
+        $fakultas = \App\Models\Fakultas::all();
+        return view('prodi.edit', compact('prodi','fakultas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Prodi $prodi)
+    public function update(Request $request, $prodi)
     {
-        //
+        $prodi = Prodi::findOrFail($prodi);
+        $fakultas = \App\Models\Fakultas::all();
+        $input = $request->validate([
+            'nama' => 'required|max:50',
+            'singkatan' => 'required|max:4',
+            'kaprodi' => 'required|max:30',
+            'sekretaris' => 'required|max:30',
+            'fakultas_id' => 'required|'
+        ]);
+        $prodi->update($input);
+
+        return redirect()->route('prodi.index')->with('success', 'Mahasiswa Berhasil Diubah');
     }
 
     /**
