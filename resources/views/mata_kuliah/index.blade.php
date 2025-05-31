@@ -50,7 +50,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $item -> kode_mk }}</td>
                                     <td>{{ $item -> nama }}</td>
-                                    <td>{{$item->prodi->nama}}</td>
+                                    <td>{{$item-> prodi-> nama}}</td>
                                     <td>
                                       <a href="{{ route ('mata_kuliah.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
                                       <form method="POST"  action="{{ route('mata_kuliah.destroy', $item->id) }}">

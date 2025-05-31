@@ -47,12 +47,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($prodi as $item)  
+                            @foreach ($prodi as $item)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $item -> nama }}</td>
                                     <td>{{ $item -> singkatan }}</td>
-                                    <td>{{$item->kaprodi}}</td>
+                                    <td>{{ $item-> kaprodi}}</td>
                                     <td>{{ $item -> sekretaris }}</td>
                                     <td>{{ $item -> fakultas -> nama}}</td>
                                     <td>

@@ -23,7 +23,8 @@ class MataKuliahController extends Controller
      */
     public function create()
     {
-        //
+        $prodi = Prodi::all();
+        return view('mata_kuliah.create', compact('prodi'));
     }
 
     /**
@@ -31,13 +32,21 @@ class MataKuliahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'kode_mk' => 'required|unique:mata_kuliah|max:6',
+            'nama' => 'required|unique:mata_kuliah|max:50',
+            'prodi_id' => 'required',
+        ]);
+
+        Mata_Kuliah::create($input);
+
+        return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah Berhasil Ditambah');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(mata_kuliah $mata_kuliah)
+    public function show(Mata_Kuliah $Mata_Kuliah)
     {
         //
     }
@@ -45,7 +54,7 @@ class MataKuliahController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(mata_kuliah $mata_kuliah)
+    public function edit(Mata_kuliah $Mata_Kuliah)
     {
         //
     }
@@ -53,7 +62,7 @@ class MataKuliahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, mata_kuliah $mata_kuliah)
+    public function update(Request $request, Mata_kuliah $Mata_Kuliah)
     {
         //
     }
@@ -61,7 +70,7 @@ class MataKuliahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(mata_kuliah $mata_kuliah)
+    public function destroy(Mata_Kuliah $Mata_Kuliah)
     {
         //
     }

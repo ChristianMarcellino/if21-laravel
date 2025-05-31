@@ -48,7 +48,7 @@ class MahasiswaController extends Controller
             $filename =time().'.'.$file->getClientOriginalExtension();
             // $file->move(public_path('images'),$filename);Public Path
             $file->storeAs('images', $filename);//Storage
-            $input['foto'] = $filename; 
+            $input['foto'] = $filename;
         }
 
         Mahasiswa::create($input);
@@ -97,7 +97,7 @@ class MahasiswaController extends Controller
             $filename =time().'.'.$file->getClientOriginalExtension();
             // $file->move(public_path('images'),$filename);Public Path
             $file->storeAs('images', $filename);//Storage
-            $input['foto'] = $filename; 
+            $input['foto'] = $filename;
         }
 
         $mahasiswa->update($input);

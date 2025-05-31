@@ -41,7 +41,7 @@ class ProdiController extends Controller
 
         Prodi::create($input);
 
-        return redirect()->route('prodi.index')->with('success', 'Mahasiswa Berhasil Disimpan');
+        return redirect()->route('prodi.index')->with('success', 'Prodi Berhasil Disimpan');
     }
 
     /**
@@ -77,7 +77,7 @@ class ProdiController extends Controller
         ]);
         $prodi->update($input);
 
-        return redirect()->route('prodi.index')->with('success', 'Mahasiswa Berhasil Diubah');
+        return redirect()->route('prodi.index')->with('success', 'Prodi Berhasil Diubah');
     }
 
     /**
