@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Fakultas')
+@section('title', 'Jadwal')
 @section('content')
 <div class="app-content">
           <!--begin::Container-->
@@ -11,7 +11,7 @@
                 <!-- Default box -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Fakultas</h3>
+                    <h3 class="card-title">Jadwal</h3>
                     <div class="card-tools">
                       <button
                         type="button"
@@ -33,34 +33,38 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <a class="nav-link mb-3" href="{{route('fakultas.create')}}"><button class="btn btn-primary">Create New Fakultas</button></a>
+                    <a class="nav-link mb-3" href="{{route('jadwal.create')}}"><button class="btn btn-primary">Create New Jadwal</button></a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Singkatan</th>
-                                <th>Nama Dekan</th>
-                                <th>Nama Wakil Dekan</th>
+                                <th>Mata Kuliah</th>
+                                <th>Dosen</th>
+                                <th>Sesi</th>
+                                <th>Kelas</th>
+                                <th>Tahun Akademik</th>
+                                <th>Kode Semester</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($fakultas as $item)
+                            @foreach ($jadwal as $item)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{ $item -> nama }}</td>
-                                    <td>{{ $item -> singkatan }}</td>
-                                    <td>{{$item->nama_dekan}}</td>
-                                    <td>{{ $item -> nama_wadek }}</td>
+                                    <td>{{ $item ->mata_kuliah->nama }}</td>
+                                    <td>{{ $item ->dosen->name }}</td>
+                                    <td>{{ $item ->sesi->nama }}</td>
+                                    <td>{{ $item ->kelas }}</td>
+                                    <td>{{$item->tahun_akademik}}</td>
+                                    <td>{{ $item -> kode_smt }}</td>
                                     <td>
-                                        <a href="{{ route ('fakultas.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
-                                        <form method="POST"  action="{{ route('fakultas.destroy', $item->id) }}">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button type="submit" class="m-auto btn btn-tool show_confirm" title="Delete" data-nama="{{ $item->name }}"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
-                                        </form>
-                                      </td>
+                                      <a href="{{ route ('jadwal.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
+                                      <form method="POST"  action="{{ route('jadwal.destroy', $item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="m-auto btn btn-tool show_confirm" title="Delete" data-nama="{{ $item->name }}"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
+                                      </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -86,3 +90,4 @@
           </div>
         </div>
 @endsection
+

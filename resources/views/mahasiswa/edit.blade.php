@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="card card-primary card-outline mb-4">
-                  <div class="card-header"><div class="card-title">Form Tambah @yield('title')</div></div>
+                  <div class="card-header"><div class="card-title">Form Edit @yield('title')</div></div>
                   <form action="{{ route('mahasiswa.update', $mahasiswa->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

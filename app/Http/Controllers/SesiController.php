@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sesi;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SesiController extends Controller
 {
@@ -12,7 +13,8 @@ class SesiController extends Controller
      */
     public function index()
     {
-        //
+        $sesi = Sesi::all();
+        return view('sesi.index', compact('sesi'));
     }
 
     /**
@@ -20,7 +22,7 @@ class SesiController extends Controller
      */
     public function create()
     {
-        //
+        return view('sesi.create');
     }
 
     /**
@@ -28,13 +30,18 @@ class SesiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'nama' => 'unique:sesi|required',
+        ]);
+
+        Sesi::create($input);
+        return redirect()->route('sesi.index')->with('success', 'Sesi Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(sesi $sesi)
+    public function show(Sesi $sesi)
     {
         //
     }
@@ -42,24 +49,30 @@ class SesiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(sesi $sesi)
+    public function edit(Sesi $sesi)
     {
-        //
+        return view('sesi.edit', compact('sesi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, sesi $sesi)
+    public function update(Request $request, Sesi $sesi)
     {
-        //
+        $input = $request->validate([
+            'nama' => ['required',Rule::unique('sesi')->ignore($sesi->id)],
+        ]);
+
+        $sesi->update($input);
+        return redirect()->route('sesi.index')->with('success','Sesi Berhasil Terupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(sesi $sesi)
+    public function destroy(Sesi $sesi)
     {
-        //
+        $sesi->delete();
+        return redirect()->route('sesi.index')->with('success','Sesi Berhasil Terhapus');
     }
 }

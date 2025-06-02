@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fakultas;
 use App\Models\Prodi;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class ProdiController extends Controller
@@ -67,10 +68,9 @@ class ProdiController extends Controller
     public function update(Request $request, $prodi)
     {
         $prodi = Prodi::findOrFail($prodi);
-        $fakultas = \App\Models\Fakultas::all();
         $input = $request->validate([
-            'nama' => 'required|max:50',
-            'singkatan' => 'required|max:4',
+            'nama' => ['required','max:50',Rule::unique('prodi', 'nama')->ignore($prodi->id)],
+            'singkatan' => ['required','max:4',Rule::unique('prodi','singkatan')->ignore($prodi->id)],
             'kaprodi' => 'required|max:30',
             'sekretaris' => 'required|max:30',
             'fakultas_id' => 'required|'

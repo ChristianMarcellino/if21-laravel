@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mata_Kuliah;
 use App\Models\Prodi;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
@@ -46,32 +47,42 @@ class MataKuliahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mata_Kuliah $Mata_Kuliah)
+    public function show(Mata_Kuliah $mata_kuliah)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mata_kuliah $Mata_Kuliah)
+    public function edit(Mata_Kuliah $mata_kuliah)
     {
-        //
+        $prodi = Prodi::all();
+        return view('mata_kuliah.edit', compact('mata_kuliah','prodi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mata_kuliah $Mata_Kuliah)
+    public function update(Request $request, $Mata_Kuliah)
     {
-        //
+        $mata_kuliah = Mata_Kuliah::findOrFail($Mata_Kuliah);
+        $input = $request->validate([
+            'kode_mk' => ['required','max:6',Rule::unique('mata_kuliah','kode_mk')->ignore($mata_kuliah->id)],
+            'nama' => ['required','max:50',Rule::unique('mata_kuliah','nama')->ignore($mata_kuliah->id)],
+            'prodi_id' => 'required',
+        ]);
+        $mata_kuliah->update($input);
+
+        return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mata_Kuliah $Mata_Kuliah)
+    public function destroy(Mata_Kuliah $matakKuliah)
     {
-        //
+        $mata_kuliah->delete();
+        return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah Terhapus');
     }
 }

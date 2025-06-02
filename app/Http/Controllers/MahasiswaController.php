@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
@@ -23,8 +24,7 @@ class MahasiswaController extends Controller
     public function create()
     {
         $prodi = \App\Models\Prodi::all();
-        $mahasiswa = Mahasiswa::all();
-        return view('mahasiswa.create', compact('mahasiswa','prodi'));
+        return view('mahasiswa.create', compact('prodi'));
     }
 
     /**
@@ -80,10 +80,9 @@ class MahasiswaController extends Controller
     public function update(Request $request, $mahasiswa)
     {
         $mahasiswa = Mahasiswa::findOrFail($mahasiswa);
-        $prodi = \App\Models\Prodi::all();
         $input = $request->validate([
             'nama' => 'required|max:50',
-            'npm' => 'required|max:11',
+            'npm' => ['required','max:11',Rule::unique('mahasiswa')->ignore($mahasiswa->id)],
             'jk' => 'required',
             'tanggal_lahir' => 'required',
             'tempat_lahir' => 'required|max:30',

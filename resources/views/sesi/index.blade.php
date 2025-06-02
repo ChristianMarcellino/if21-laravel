@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Fakultas')
+@section('title', 'Sesi')
 @section('content')
 <div class="app-content">
           <!--begin::Container-->
@@ -11,7 +11,7 @@
                 <!-- Default box -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Fakultas</h3>
+                    <h3 class="card-title">Sesi</h3>
                     <div class="card-tools">
                       <button
                         type="button"
@@ -33,34 +33,32 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <a class="nav-link mb-3" href="{{route('fakultas.create')}}"><button class="btn btn-primary">Create New Fakultas</button></a>
+                    <a class="nav-link mb-3" href="{{route('sesi.create')}}"><button class="btn btn-primary">Create New sesi</button></a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Singkatan</th>
-                                <th>Nama Dekan</th>
-                                <th>Nama Wakil Dekan</th>
+                                <th>Nama Sesi</th>
+                                <th>Dibuat Pada</th>
+                                <th>Diupdate Pada</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($fakultas as $item)
+                            @foreach ($sesi as $item)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $item -> nama }}</td>
-                                    <td>{{ $item -> singkatan }}</td>
-                                    <td>{{$item->nama_dekan}}</td>
-                                    <td>{{ $item -> nama_wadek }}</td>
+                                    <td>{{ $item -> created_at }}</td>
+                                    <td>{{ $item-> updated_at}}</td>
                                     <td>
-                                        <a href="{{ route ('fakultas.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
-                                        <form method="POST"  action="{{ route('fakultas.destroy', $item->id) }}">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button type="submit" class="m-auto btn btn-tool show_confirm" title="Delete" data-nama="{{ $item->name }}"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
-                                        </form>
-                                      </td>
+                                      <a href="{{ route ('sesi.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
+                                      <form method="POST"  action="{{ route('sesi.destroy', $item->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="m-auto btn btn-tool show_confirm" title="Delete" data-nama="{{ $item->name }}"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>
+                                      </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -86,3 +84,4 @@
           </div>
         </div>
 @endsection
+

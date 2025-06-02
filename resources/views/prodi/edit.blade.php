@@ -1,13 +1,13 @@
 @extends('main')
 
-@section('title', 'Prodi')
+@section('title', 'Program Studi')
 @section('content')
 <div class="app-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-6">
                 <div class="card card-primary card-outline mb-4">
-                  <div class="card-header"><div class="card-title">Form Tambah @yield('title')</div></div>
+                  <div class="card-header"><div class="card-title">Form Edit @yield('title')</div></div>
                   <form action="{{ route('prodi.update', $prodi->id)}}" method="POST">
                     @csrf
                     @method('PUT')
@@ -22,7 +22,7 @@
                       </div>
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Prodi</label>
-                        <input type="text" class="form-control" name="nama" value="{{ old('nama') ? old('nama') : $prodi->nama }}">
+                        <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') ? old('nama') : $prodi->nama }}">
                       </div>
                       <div class="mb-3">
                         <label for="singkatan" class="form-label">Singkatan Prodi</label>
@@ -38,7 +38,7 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary confirm_update">Submit</button>
+                      <button type="submit" class="btn btn-primary confirm_edit">Submit</button>
                     </div>
                   </form>
                 </div>

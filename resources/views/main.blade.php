@@ -65,11 +65,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('fakultas.index')}}">Fakultas</a>
             </li>
-              <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('prodi.index')}}">Prodi</a>
             </li>
-              <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('mahasiswa.index')}}">Mahasiswa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('mata_kuliah.index')}}">Mata Kuliah</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('sesi.index')}}">Sesi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('jadwal.index')}}">Jadwal</a>
             </li>
           </ul>
           <!--end::Start Navbar Links-->
@@ -300,11 +309,35 @@
                     <i class="nav-icon bi bi-people"></i> Fakultas
                 </a>
             </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('prodi.index')}}"><i class="nav-icon bi bi-people"></i> Prodi</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('prodi.index')}}">
+                    <i class="nav-icon bi bi-people"></i>
+                    Prodi
+                </a>
             </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('mahasiswa.index')}}"><i class="nav-icon bi bi-people"></i> Mahasiswa</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('mahasiswa.index')}}">
+                    <i class="nav-icon bi bi-people"></i>
+                    Mahasiswa
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('mata_kuliah.index')}}">
+                    <i class="nav-icon bi bi-people"></i>
+                    Mata Kuliah
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('sesi.index')}}">
+                    <i class="nav-icon bi bi-people"></i>
+                    Sesi
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('jadwal.index')}}">
+                    <i class="nav-icon bi bi-people"></i>
+                    Jadwal
+                </a>
             </li>
             </ul>
             <!--end::Sidebar Menu-->
@@ -403,7 +436,7 @@
         }
       });
     </script>
-    
+
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
@@ -455,7 +488,7 @@
                 icon: "success",
                 timer:10000
               }).then(()=>{
-                form.submit();  
+                form.submit();
               });
             }
           });

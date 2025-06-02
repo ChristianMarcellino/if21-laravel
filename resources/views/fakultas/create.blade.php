@@ -13,7 +13,7 @@
                     <div class="card-body">
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Fakultas</label>
-                        <input type="text" class="form-control" name="nama">
+                        <input id="nama" type="text" class="form-control" name="nama">
                       </div>
                       <div class="mb-3">
                         <label for="singkatan" class="form-label">Singkatan Fakultas</label>
@@ -29,7 +29,7 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary confirm_input">Submit</button>
                     </div>
                   </form>
                 </div>

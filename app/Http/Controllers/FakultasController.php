@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Fakultas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class FakultasController extends Controller
 {
@@ -58,15 +60,24 @@ class FakultasController extends Controller
      */
     public function edit(Fakultas $fakultas)
     {
-        //
+        return view('fakultas.edit',compact('fakultas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fakultas $fakultas)
+    public function update(Request $request, $fakultas)
     {
-        //
+        $fakultas = Fakultas::findOrFail($fakultas);
+        $input = $request->validate([
+            'nama' => ['required','max:50',Rule::unique('fakultas','nama')->ignore($fakultas->id)],
+            'singkatan' => ['required','max:4',Rule::unique('fakultas', 'singkatan')->ignore($fakultas->id)],
+            'nama_dekan' => 'required|max:30',
+            'nama_wadek' => 'required|max:30'
+        ]);
+
+        $fakultas->update($input);
+        return redirect()->route('fakultas.index')->with('success','Fakultas Berhasil Terupdate');
     }
 
     /**
@@ -74,6 +85,7 @@ class FakultasController extends Controller
      */
     public function destroy(Fakultas $fakultas)
     {
-        
+        $fakultas->delete();
+        return redirect()->route('fakultas.index')->with('success','Fakultas Berhasil Terhapus');
     }
 }
