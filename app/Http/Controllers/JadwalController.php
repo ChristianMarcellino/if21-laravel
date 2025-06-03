@@ -19,7 +19,7 @@ class JadwalController extends Controller
         $dosen = User::all();
         $sesi = Sesi::all();
         $mata_kuliah = Mata_Kuliah::all();
-        return view('jadwal.index',compact('jadwal','dosen','sesi','mata_kuliah'));
+        return view('jadwal.index', compact('jadwal','dosen','sesi','mata_kuliah'));
     }
 
     /**
@@ -30,7 +30,7 @@ class JadwalController extends Controller
         $dosen = User::all();
         $sesi = Sesi::all();
         $mata_kuliah = Mata_Kuliah::all();
-        return view('jadwal.create',compact('dosen','mata_kuliah','sesi'));
+        return view('jadwal.create', compact('dosen','mata_kuliah','sesi'));
     }
 
     /**
@@ -39,8 +39,8 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'tahun_akademik' => 'required|max:4',
-            'kode_smt' => 'required|max:5',
+            'tahun_akademik' => 'required|max:9',
+            'kode_smt' => 'required|max:6',
             'kelas' => 'required|max:5',
             'mata_kuliah_id' => 'required',
             'dosen_id' => 'required',

@@ -24,6 +24,11 @@
             <div id="containerTahun"></div>
         </figure>
     </div>
+    <div class="col-6">
+        <figure class="highcharts-figure">
+            <div id="containerKelas"></div>
+        </figure>
+    </div>
 </div>
 
 
@@ -38,7 +43,7 @@
 
 #container {
     height: 400px;
-} 
+}
 
 .highcharts-data-table table {
     font-family: Verdana, sans-serif;
@@ -141,7 +146,7 @@ Highcharts.chart('containerSma', {
             'Source: Universitas MDP '
     },
     xAxis: {
-        categories: 
+        categories:
         [
             @foreach ($mahasiswaSma as $item)
                 '{{ $item->asal_sma }}',
@@ -170,7 +175,7 @@ Highcharts.chart('containerSma', {
     series: [
         {
             name: 'Mahasiswa',
-            data: 
+            data:
             [
                 @foreach ($mahasiswaSma as $item)
                     {{ $item->jumlah }},
@@ -192,7 +197,7 @@ Highcharts.chart('containerTahun', {
             'Source: Universitas MDP '
     },
     xAxis: {
-        categories: 
+        categories:
         [
             @foreach ($mahasiswaTahun as $item)
                 '20{{ $item->tahun }}',
@@ -221,9 +226,68 @@ Highcharts.chart('containerTahun', {
     series: [
         {
             name: 'Mahasiswa',
-            data: 
+            data:
             [
                 @foreach ($mahasiswaTahun as $item)
+                    {{ $item->jumlah }},
+                @endforeach
+            ]
+        }
+    ]
+});
+Highcharts.chart('containerKelas', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Jumlah Kelas Program Studi'
+    },
+    subtitle: {
+        text:
+            'Source: Universitas MDP '
+    },
+    xAxis: {
+        categories:
+        [
+            @foreach ($kelasProdi as $item)
+                '{{ $item->tahun_akademik }}',
+            @endforeach
+        ],
+        crosshair: true,
+        accessibility: {
+            description: 'Prodi'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Jumlah Kelas'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' Kelas'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Informatika',
+            data:
+            [
+                @foreach ($kelasProdiIf as $item)
+                    {{ $item->jumlah }},
+                @endforeach
+            ]
+        },
+        {
+            name: 'Sistem Informasi',
+            data:
+            [
+                @foreach ($kelasProdiSi as $item)
                     {{ $item->jumlah }},
                 @endforeach
             ]

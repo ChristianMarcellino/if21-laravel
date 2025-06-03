@@ -39,8 +39,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kode Mata Kuliah</th>
-                                <th>Nama Mata Kuliah</th>
-                                <th>Dosen Pengampu</th>
+                                <th>Mata Kuliah</th>
+                                <th>Program Studi</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

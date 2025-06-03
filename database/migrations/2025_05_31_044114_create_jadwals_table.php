@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_akademik',4);
-            $table->string('kode_smt', 5);
+            $table->string('tahun_akademik',9);
+            $table->string('kode_smt', 6);
             $table->string('kelas', 5);
             $table->unsignedBigInteger('mata_kuliah_id');
             $table->foreign('mata_kuliah_id')->references('id')->on('mata_kuliah')->onDelete('restrict')->onUpdate('restrict');

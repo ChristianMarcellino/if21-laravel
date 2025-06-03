@@ -13,7 +13,7 @@
                     <div class="card-body">
                       <div class="mb-3">
                       <label for="mata_kuliah_id" class="form-label">Mata Kuliah</label>
-                      <select class="form-select" name="mata_kuliah_id" id="nama">
+                      <select class="form-select" name="mata_kuliah_id" id="mata_kuliah_id">
                         @foreach ($mata_kuliah as $item)
                           <option value="{{ $item -> id }}">{{ $item->nama }}</option>
                         @endforeach
@@ -23,7 +23,7 @@
                         <label for="dosen_id" class="form-label">Nama Dosen</label>
                         <select class="form-select" name="dosen_id" id="dosen_id">
                           @foreach ($dosen as $item)
-                            <option value="{{ $item -> id }}">{{ $item->nama }}</option>
+                            <option value="{{ $item -> id }}">{{ $item->name }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -37,19 +37,24 @@
                         </div>
                       <div class="mb-3">
                         <label for="kelas" class="form-label">Kelas</label>
-                        <input id="kelas" type="text" class="form-control" name="kelas">
+                        <input id="nama" type="text" class="form-control" name="kelas">
+                        @error('kelas')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="singkatan" class="form-label">Singkatan Prodi</label>
-                        <input type="text" class="form-control" name="singkatan">
+                        <label for="tahun_akademik" class="form-label">Tahun Akademik</label>
+                        <input id="tahun_akademik" type="text" class="form-control" name="tahun_akademik">
+                        @error('tahun_akademik')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="kaprodi" class="form-label">Nama Kaprodi</label>
-                        <input type="text" class="form-control" name="kaprodi">
-                      </div>
-                      <div class="mb-3">
-                        <label for="sekretaris" class="form-label">Nama Sekretaris</label>
-                        <input type="text" class="form-control" name="sekretaris">
+                        <label for="kode_smt" class="form-label">Kode Semester</label>
+                        <input type="text" class="form-control" name="kode_smt">
+                        @error('kode_smt')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                     </div>
                     <div class="card-footer">

@@ -13,11 +13,11 @@ class Jadwal extends Model
         return $this->belongsTo(Mata_Kuliah::class, 'mata_kuliah_id', 'id');
     }
 
-    public function users(){
-        return $this->belongsTo(Users::class, 'dosen_id', 'id');
+    public function dosen(){
+        return $this->belongsTo(User::class, 'dosen_id', 'id');
     }
 
     public function sesi(){
-        return $this->belongsTo(Prodi::class, 'sesi_id', 'id');
+        return $this->belongsTo(Sesi::class, 'sesi_id', 'id');
     }
 }
