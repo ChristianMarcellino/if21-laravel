@@ -12,22 +12,27 @@ class DashboardController extends Controller
         group by prodi.nama;');
         $mahasiswaSma = DB::select('select asal_sma, count(*) as jumlah From mahasiswa
         group by asal_sma;');
-        $mahasiswaTahun = DB::select('select substring(npm,1,2) as tahun, count(*) as jumlah from mahasiswa
-        group by tahun;');
-        $kelasProdi = DB::select('select tahun_akademik,prodi.nama, count(*) as jumlah from jadwal
-        JOIN mata_kuliah ON mata_kuliah_id = mata_kuliah.id
-        JOIN prodi ON prodi_id = prodi.id
-        group by prodi.nama,tahun_akademik;');
-        $kelasProdiIf = DB::select('select tahun_akademik,prodi.nama, count(*) as jumlah from jadwal
-        JOIN mata_kuliah ON mata_kuliah_id = mata_kuliah.id
-        JOIN prodi ON prodi_id = prodi.id
-        where prodi.nama = "Informatika"
-        group by prodi.nama,tahun_akademik;');
-        $kelasProdiSi = DB::select('select tahun_akademik,prodi.nama, count(*) as jumlah from jadwal
-        JOIN mata_kuliah ON mata_kuliah_id = mata_kuliah.id
-        JOIN prodi ON prodi_id = prodi.id
-        where prodi.nama = "Sistem Informasi"
-        group by prodi.nama,tahun_akademik;');
-        return view('dashboard.index', compact('mahasiswaProdi','mahasiswaSma','mahasiswaTahun','kelasProdi','kelasProdiIf','kelasProdiSi'));
+
+        // Query Builder Laravel
+        $mahasiswaTahun = DB::table('mahasiswa')
+        ->select(DB::raw('substring(npm,1,2) as tahun'), DB::raw('count(*) as jumlah'))
+        ->groupBy('tahun')
+        ->get();
+
+        $kelasProdi = DB::table('jadwal')
+        ->join('mata_kuliah', 'mata_kuliah_id' , '=' ,'mata_kuliah.id')
+        ->join('prodi','prodi_id', '=', 'prodi.id')
+        ->select('tahun_akademik','prodi.nama', DB::raw('count(*) as jumlah'))
+        ->groupBy('prodi.nama', 'tahun_akademik')
+        ->get();
+
+        $prodiCollection = collect($kelasProdi);
+
+        $informatika = $prodiCollection->where('nama', 'Informatika');
+        $sistemInformasi = $prodiCollection->where('nama', 'Sistem Informasi');
+
+        $tahunAkademik = $prodiCollection->pluck('tahun_akademik')->unique()->values();
+
+        return view('dashboard.index', compact('mahasiswaProdi','mahasiswaSma','mahasiswaTahun','informatika','sistemInformasi','tahunAkademik'));
     }
 }

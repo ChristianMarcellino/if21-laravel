@@ -13,19 +13,31 @@
                     <div class="card-body">
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Fakultas</label>
-                        <input id="nama" type="text" class="form-control" name="nama">
+                        <input id="nama" type="text" class="form-control" name="nama" value="{{old('nama')}}">
+                        @error('nama')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <label for="singkatan" class="form-label">Singkatan Fakultas</label>
-                        <input type="text" class="form-control" name="singkatan">
+                        <input type="text" class="form-control" name="singkatan" value="{{old('singkatan')}}">
+                        @error('singkatan')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <label for="nama_dekan" class="form-label">Nama Dekan</label>
-                        <input type="text" class="form-control" name="nama_dekan">
+                        <input type="text" class="form-control" name="nama_dekan" value="{{old('nama_dekan')}}">
+                        @error('nama_dekan')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div
                       ><div class="mb-3">
                         <label for="nama_wadek" class="form-label">Nama Wakil Dekan</label>
-                        <input type="text" class="form-control" name="nama_wadek">
+                        <input type="text" class="form-control" name="nama_wadek" value="{{old('nama_wadek')}}">
+                        @error('nama_wadek')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                     </div>
                     <div class="card-footer">

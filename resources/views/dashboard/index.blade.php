@@ -249,8 +249,8 @@ Highcharts.chart('containerKelas', {
     xAxis: {
         categories:
         [
-            @foreach ($kelasProdi as $item)
-                '{{ $item->tahun_akademik }}',
+            @foreach ($tahunAkademik as $item)
+                '{{ $item }}',
             @endforeach
         ],
         crosshair: true,
@@ -278,7 +278,7 @@ Highcharts.chart('containerKelas', {
             name: 'Informatika',
             data:
             [
-                @foreach ($kelasProdiIf as $item)
+                @foreach ($informatika as $item)
                     {{ $item->jumlah }},
                 @endforeach
             ]
@@ -287,7 +287,7 @@ Highcharts.chart('containerKelas', {
             name: 'Sistem Informasi',
             data:
             [
-                @foreach ($kelasProdiSi as $item)
+                @foreach ($sistemInformasi as $item)
                     {{ $item->jumlah }},
                 @endforeach
             ]
