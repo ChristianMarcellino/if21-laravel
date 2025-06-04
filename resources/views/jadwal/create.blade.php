@@ -15,7 +15,7 @@
                       <label for="mata_kuliah_id" class="form-label">Mata Kuliah</label>
                       <select class="form-select" name="mata_kuliah_id" id="mata_kuliah_id">
                         @foreach ($mata_kuliah as $item)
-                          <option value="{{ $item -> id }}">{{ $item->nama }}</option>
+                          <option value="{{ $item -> id }} {{ old('mata_kuliah_id') == $item->id ? 'selected' : ''">{{ $item->nama }}</option>
                         @endforeach
                       </select>
                       </div>
@@ -23,7 +23,7 @@
                         <label for="dosen_id" class="form-label">Nama Dosen</label>
                         <select class="form-select" name="dosen_id" id="dosen_id">
                           @foreach ($dosen as $item)
-                            <option value="{{ $item -> id }}">{{ $item->name }}</option>
+                            <option value="{{ $item -> id }} {{ old('dosen_id') == $item->id ? 'selected' : ''">{{ $item->name }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -31,7 +31,7 @@
                         <label for="sesi_id" class="form-label">Waktu Sesi</label>
                         <select class="form-select" name="sesi_id" id="sesi_id">
                           @foreach ($sesi as $item)
-                            <option value="{{ $item -> id }}">{{ $item->nama }}</option>
+                            <option value="{{ $item -> id }}" {{ old('sesi_id') == $item->id ? 'selected' : ''}}>{{ $item->nama }}</option>
                           @endforeach
                         </select>
                         </div>

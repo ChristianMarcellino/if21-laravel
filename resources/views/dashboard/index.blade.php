@@ -274,25 +274,15 @@ Highcharts.chart('containerKelas', {
         }
     },
     series: [
-        {
-            name: 'Informatika',
-            data:
-            [
-                @foreach ($informatika as $item)
-                    {{ $item->jumlah }},
-                @endforeach
-            ]
-        },
-        {
-            name: 'Sistem Informasi',
-            data:
-            [
-                @foreach ($sistemInformasi as $item)
-                    {{ $item->jumlah }},
-                @endforeach
-            ]
-        }
-    ]
+    {
+        name: 'Informatika',
+        data: {!! json_encode($informatikaData) !!}
+    },
+    {
+        name: 'Sistem Informasi',
+        data: {!! json_encode($sistemInformasiData) !!}
+    }
+]
 });
   </script>
 @endsection

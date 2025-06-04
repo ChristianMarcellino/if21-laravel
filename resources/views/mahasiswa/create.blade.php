@@ -65,7 +65,7 @@
                         <label for="prodi_id" class="form-label">Program Studi</label>
                         <select class="form-select" name="prodi_id" id="prodi_id">
                         @foreach ($prodi as $item)
-                          <option value="{{ $item -> id }}">{{ $item->nama }}</option>
+                          <option value="{{ $item -> id }}" {{ old('prodi_id') == $item->id ? 'selected' : ''}}>{{ $item->nama }}</option>
                         @endforeach
                       </select>
                       </div>

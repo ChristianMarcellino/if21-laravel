@@ -59,7 +59,7 @@
                                     <td>{{ $item -> kode_smt }}</td>
                                     <td>
                                       <a href="{{ route ('jadwal.edit' , $item->id)}}" class="m-auto btn btn-tool"><i style="font-size:3dvh;" class="bi bi-pencil-fill"></i></a>
-                                      <form method="POST"  action="{{ route('jadwal.destroy', $item->id) }}">
+                                      <form method="POST" action="{{ route('jadwal.destroy', $item->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="m-auto btn btn-tool show_confirm" title="Delete" data-nama="{{ $item->name }}"><i style="font-size:4dvh;" class="bi bi-trash"></i></button>

@@ -8,8 +8,9 @@
             <div class="col-6">
                 <div class="card card-primary card-outline mb-4">
                   <div class="card-header"><div class="card-title">Form Tambah @yield('title')</div></div>
-                  <form action="{{ route('fakultas.store')}}" method="POST">
+                  <form action="{{ route('fakultas.update', $fakultas->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="card-body">
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Fakultas</label>
@@ -41,7 +42,7 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary confirm_input">Submit</button>
+                      <button type="submit" class="btn btn-primary confirm_edit">Submit</button>
                     </div>
                   </form>
                 </div>

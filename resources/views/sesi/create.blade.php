@@ -13,7 +13,7 @@
                     <div class="card-body">
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama sesi</label>
-                        <input id="nama" type="text" class="form-control" name="nama">
+                        <input id="nama" type="text" class="form-control" name="nama"  value="{{ old('nama') }}">
                       </div>
                     </div>
                     <div class="card-footer">

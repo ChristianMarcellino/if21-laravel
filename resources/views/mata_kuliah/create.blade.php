@@ -15,7 +15,7 @@
                       <label for="nama" class="form-label">Nama Prodi</label>
                       <select class="form-select" name="prodi_id" id="prodi_id">
                         @foreach ($prodi as $item)
-                          <option value="{{ $item ->id }}">{{ $item->nama }}</option>
+                          <option value="{{ $item ->id }} {{ old('prodi_id') == $item->id ? 'selected' : ''}}>{{ $item->nama }}</option>
                         @endforeach
                       </select>
                         @error('prodi_id')
@@ -24,14 +24,14 @@
                       </div>
                       <div class="mb-3">
                         <label for="kode_mk" class="form-label">Kode Mata Kuliah</label>
-                        <input type="text" class="form-control" name="kode_mk">
+                        <input type="text" class="form-control" name="kode_mk"  value="{{ old('kode_mk') }}">
                         @error('kode_mk')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Mata Kuliah</label>
-                        <input id="nama" type="text" class="form-control" name="nama">
+                        <input id="nama" type="text" class="form-control" name="nama"  value="{{ old('nama') }}">
                         @error('nama')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

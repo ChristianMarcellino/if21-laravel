@@ -77,8 +77,8 @@ class JadwalController extends Controller
     {
         $jadwal = Jadwal::findOrFail($jadwal);
         $input = $request->validate([
-            'tahun_akademik' => 'required|max:4',
-            'kode_smt' => 'required|max:5',
+            'tahun_akademik' => 'required|max:9',
+            'kode_smt' => 'required|max:6',
             'kelas' => 'required|max:5',
             'mata_kuliah_id' => 'required',
             'dosen_id' => 'required',

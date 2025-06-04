@@ -18,21 +18,36 @@ class DashboardController extends Controller
         ->select(DB::raw('substring(npm,1,2) as tahun'), DB::raw('count(*) as jumlah'))
         ->groupBy('tahun')
         ->get();
+        
+        
+        $tahunAkademik = DB::table('jadwal')
+        ->select('tahun_akademik')
+        ->distinct()
+        ->pluck('tahun_akademik');
 
         $kelasProdi = DB::table('jadwal')
-        ->join('mata_kuliah', 'mata_kuliah_id' , '=' ,'mata_kuliah.id')
-        ->join('prodi','prodi_id', '=', 'prodi.id')
-        ->select('tahun_akademik','prodi.nama', DB::raw('count(*) as jumlah'))
-        ->groupBy('prodi.nama', 'tahun_akademik')
-        ->get();
-
+            ->join('mata_kuliah', 'mata_kuliah_id', '=', 'mata_kuliah.id')
+            ->join('prodi', 'prodi_id', '=', 'prodi.id')
+            ->select('tahun_akademik', 'prodi.nama', DB::raw('COUNT(*) as jumlah'))
+            ->groupBy('prodi.nama', 'tahun_akademik')
+            ->get();
         $prodiCollection = collect($kelasProdi);
 
         $informatika = $prodiCollection->where('nama', 'Informatika');
         $sistemInformasi = $prodiCollection->where('nama', 'Sistem Informasi');
 
-        $tahunAkademik = $prodiCollection->pluck('tahun_akademik')->unique()->values();
+        $informatikaData = [];
+        $sistemInformasiData = [];
 
-        return view('dashboard.index', compact('mahasiswaProdi','mahasiswaSma','mahasiswaTahun','informatika','sistemInformasi','tahunAkademik'));
+        foreach ($tahunAkademik as $tahun) {
+            $informatikaJumlah = $informatika->firstWhere('tahun_akademik', $tahun)?->jumlah ?? 0;
+            $sistemInformasiJumlah = $sistemInformasi->firstWhere('tahun_akademik', $tahun)?->jumlah ?? 0;
+
+            $informatikaData[] = $informatikaJumlah;
+            $sistemInformasiData[] = $sistemInformasiJumlah;
+        }
+
+
+        return view('dashboard.index', compact('mahasiswaProdi','mahasiswaSma','mahasiswaTahun','informatikaData','sistemInformasiData','tahunAkademik'));
     }
 }

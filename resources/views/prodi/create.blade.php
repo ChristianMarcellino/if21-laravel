@@ -15,25 +15,25 @@
                       <label for="fakultas_id" class="form-label">Nama Fakultas</label>
                       <select class="form-select" name="fakultas_id" id="fakultas_id">
                         @foreach ($fakultas as $item)
-                          <option value="{{ $item -> id }}">{{ $item->nama }}</option>
+                          <option value="{{ $item -> id }} {{ old('prodi_id') == $item->id ? 'selected' : ''}}">{{ $item->nama }}</option>
                         @endforeach
                       </select>
                       </div>
                       <div class="mb-3">
                         <label for="nama" class="form-label">Nama Prodi</label>
-                        <input id="nama" type="text" class="form-control" name="nama">
+                        <input id="nama" type="text" class="form-control" name="nama"  value="{{ old('nama') }}">
                       </div>
                       <div class="mb-3">
                         <label for="singkatan" class="form-label">Singkatan Prodi</label>
-                        <input type="text" class="form-control" name="singkatan">
+                        <input type="text" class="form-control" name="singkatan"  value="{{ old('singkat') }}">
                       </div>
                       <div class="mb-3">
                         <label for="kaprodi" class="form-label">Nama Kaprodi</label>
-                        <input type="text" class="form-control" name="kaprodi">
+                        <input type="text" class="form-control" name="kaprodi"  value="{{ old('kaprodi') }}">
                       </div>
                       <div class="mb-3">
                         <label for="sekretaris" class="form-label">Nama Sekretaris</label>
-                        <input type="text" class="form-control" name="sekretaris">
+                        <input type="text" class="form-control" name="sekretaris"  value="{{ old('sekretaris') }}">
                       </div>
                     </div>
                     <div class="card-footer">
