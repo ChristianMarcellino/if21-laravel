@@ -80,7 +80,7 @@ class MataKuliahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mata_Kuliah $matakKuliah)
+    public function destroy(Mata_Kuliah $mata_kuliah)
     {
         $mata_kuliah->delete();
         return redirect()->route('mata_kuliah.index')->with('success', 'Mata Kuliah Terhapus');
