@@ -12,7 +12,7 @@ use App\Http\Controllers\JadwalController;
 
 Route::get('/', function () {
     // return view('welcome');
-    return redirect('/login');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
