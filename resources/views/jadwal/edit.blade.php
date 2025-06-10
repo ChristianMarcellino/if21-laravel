@@ -26,7 +26,7 @@
                           @foreach ($dosen as $item)
                             <option value="{{ $item -> id }}" {{ old('dosen_id') == $item->id ? 'selected' : ($jadwal->dosen_id == $item->id ? 'selected' : null) }}>{{ $item->name }}</option>
                           @endforeach
-                        </select>
+                        </select> 
                       </div>
                       <div class="mb-3">
                         <label for="sesi_id" class="form-label">Waktu Sesi</label>
