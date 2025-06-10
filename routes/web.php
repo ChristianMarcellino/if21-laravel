@@ -11,7 +11,8 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\JadwalController;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/dashboard', function () {
@@ -22,13 +23,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
     Route::resource('/fakultas', FakultasController::class);
     Route::resource('/prodi', ProdiController::class);
     Route::resource('/mahasiswa', MahasiswaController::class);
     Route::resource('/mata_kuliah', MataKuliahController::class);
     Route::resource('/sesi', SesiController::class);
     Route::resource('/jadwal', JadwalController::class);
-});
 
 
 
