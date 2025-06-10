@@ -440,34 +440,16 @@
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <script>
-        $('.confirm_input').click(function(event){
-          var form = $(this).closest("form");
-          var nama = $('#nama').val();
-          event.preventDefault();
-          Swal.fire({
-            title: "Good job!",
-            text: `Data ${nama} Berhasil Ditambahkan`,
-            icon: "success"
-          }).then((result)=>{
-            form.submit();
-          });
-        })
-      </script>
-      <script>
-        $('.confirm_edit').click(function(event){
-          var form = $(this).closest("form");
-          var nama = $('#nama').val();
-          event.preventDefault();
-          Swal.fire({
-            title: "Good job!",
-            text: `Data ${nama} Berhasil Diubah`,
-            icon: "success"
-          }).then((result)=>{
-            form.submit();
-          });
-        })
-      </script>
+      @if (session('success') || session('error') || session('info') || session('warning'))
+        <script>
+            Swal.fire({
+                icon: '{{ session('success') ? 'success' : (session('error') ? 'error' : (session('warning') ? 'warning' : 'info')) }}',
+                title: '{{ session('success') ? 'Success' : (session('error') ? 'Error' : (session('warning') ? 'Warning' : 'Info')) }}',
+                text: `{!! session('success') ?? session('error') ?? session('warning') ?? session('info') !!}`,
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
       <script>
         $('.show_confirm').click(function(event) {
             var form = $(this).closest("form");
@@ -483,14 +465,7 @@
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success",
-                timer:10000
-              }).then(()=>{
                 form.submit();
-              });
             }
           });
         })
