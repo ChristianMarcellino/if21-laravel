@@ -23,6 +23,7 @@ class DashboardController extends Controller
         $tahunAkademik = DB::table('jadwal')
         ->select('tahun_akademik')
         ->distinct()
+        ->orderBy('tahun_akademik')
         ->pluck('tahun_akademik');
 
         $kelasProdi = DB::table('jadwal')
@@ -30,6 +31,7 @@ class DashboardController extends Controller
             ->join('prodi', 'prodi_id', '=', 'prodi.id')
             ->select('tahun_akademik', 'prodi.nama', DB::raw('COUNT(*) as jumlah'))
             ->groupBy('prodi.nama', 'tahun_akademik')
+            ->orderBy('tahun_akademik')
             ->get();
         $prodiCollection = collect($kelasProdi);
 
